@@ -19,7 +19,7 @@ With the development of technology for molecular-level observation, many new typ
 
 - `RNA_1`, `RNA_2`,..., `RNA_500`: these are all __numerical values for different RNA-seq__ (numerical).
 
-![](/Users/yonwang/Desktop/PCA Trajectory/Figure/Figure for Post/Dataset.jpeg) 
+![](https://github.com/YzwIsALaity/PCA-Visualization-Tutorial-in-R/blob/b914277f23d70ba3831a69bf0428310099d7b1dc/Dataset.jpeg) 
 
 It is clear that the dataset is high-dimensional, as the number of variables ($p = 500$) is much greater than the number of observations ($n = 120$). PCA will be performed on 500 different RNA-seq variables.
 
@@ -42,7 +42,7 @@ Dt.Plot <- cbind(Dt[, 1:3], X_pca)
 head(Dt.Plot)
 ```
 
-![](/Users/yonwang/Desktop/PCA Trajectory/Figure/Figure for Post/Dataset after PCA.jpeg) 
+![](https://github.com/YzwIsALaity/PCA-Visualization-Tutorial-in-R/blob/b914277f23d70ba3831a69bf0428310099d7b1dc/Dataset%20after%20PCA.jpeg) 
 
 There are many different packages in R that can perform various types of principal component analysis. Regardless of which one users choose to implement, the result will include a matrix that represents a rotation of the original dataset, and the visualization will be based on this matrix. After passing our RNA-seq data into a PCA model, we need to obtain a __matrix of the rotated data values__ via the argument `pca$x`. __This matrix represents a mapping of the original row observations into the space represented by the principal components__. Mostly, we want to visualize its results in 2D or 3D spaces so we extract first three principle components. In the next sections, we are going to show how we can __visualize PCA results with 2D and 3D spaces with__ `ggplot2` __and__ `plotly` __packages__.
 
@@ -72,7 +72,7 @@ ggplot(Dt.Plot, aes(x = PC1, y = PC2, col = Treatment)) +
 p_2D_PCA
 ```
 
-![](/Users/yonwang/Desktop/PCA Trajectory/Figure/Figure for Post/2D PCA Scatter.jpeg) 
+![](https://github.com/YzwIsALaity/PCA-Visualization-Tutorial-in-R/blob/b914277f23d70ba3831a69bf0428310099d7b1dc/2D%20PCA%20Scatter.jpeg) 
 
 The first scatter plot of PCA results is a 2D representation of the dataset without stratification by unique patient ID, but with points colored according to treatment. Despite performing dimension reduction, we did not observe any clear indication that treatments differed in RNA-seq levels. 
 
@@ -101,7 +101,7 @@ ggplot(Dt.Plot, aes(x = PC1, y = PC2, col = Treatment)) +
 p_2D_PCA_ID
 ```
 
-![](/Users/yonwang/Desktop/PCA Trajectory/Figure/Figure for Post/2D PCA Scatter with ID.jpeg) 
+![](https://github.com/YzwIsALaity/PCA-Visualization-Tutorial-in-R/blob/b914277f23d70ba3831a69bf0428310099d7b1dc/2D%20PCA%20Scatter%20with%20ID.jpeg) 
 
 After stratifying the data by patient ID, we observed that the effect of treatments on RNA-seq varied among patients. Specifically, patients P_4 and P_5 showed minimal differences in RNA-seq in the 2D space created by principle components, while patient P_3 exhibited clear separation in treatments within the same 2D space.
 
@@ -139,7 +139,7 @@ p_3D_PCA <- p_3D_PCA %>% layout(scene = list(xaxis = list(title = 'PC1'),   # ax
 p_3D_PCA
 ```
 
-![](/Users/yonwang/Desktop/PCA Trajectory/Figure/Figure for Post/3D PCA Scatter.png) 
+![](https://github.com/YzwIsALaity/PCA-Visualization-Tutorial-in-R/blob/b914277f23d70ba3831a69bf0428310099d7b1dc/3D%20PCA%20Scatter.png) 
 
 Unfortunately, although we represented the original data with three principal components, we did not observe any significant separation between the high-dimensional RNA-seq data after dimension reduction based on the effect of treatment.
 
@@ -167,7 +167,7 @@ Dt.Plot.Aggregated$'Treatment' <- factor(c(rep('No', 12), rep('Yes', 12)),
 head(Dt.Plot.Aggregated)
 ```
 
-![](/Users/yonwang/Desktop/PCA Trajectory/Figure/Figure for Post/Dataset for aggregate PCA.jpeg)
+![](https://github.com/YzwIsALaity/PCA-Visualization-Tutorial-in-R/blob/b914277f23d70ba3831a69bf0428310099d7b1dc/Dataset%20for%20aggregate%20PCA.jpeg)
 
 The aggregated dataset consists of five columns: time points, the means of principal components aggregated by patient level at different time points, and a treatment variable. After obtaining the aggregated dataset, we will implement smoothing functions, such as cubic splines, to obtain trajectories in 2D or 3D spaces. To do this, we will first use the aggregated PC values to fit a spline regression over time in each dimension using the `splinefun()` function. Then, we will use a series of consecutive points with equal length to make interpolations of the fitted spline. To specify `x` and `y` in the `splinefun()` function, we will set `x` as time and `y` as aggregated PC values.
 
@@ -186,7 +186,7 @@ Dt.Plot.Traj <- data.frame(Treatment, 'PC1' = PC1, 'PC2' = PC2, 'PC3' = PC3)
 head(Dt.Plot.Traj)
 ```
 
-![](/Users/yonwang/Desktop/PCA Trajectory/Figure/Figure for Post/Dataset after PCA.jpeg)
+![](https://github.com/YzwIsALaity/PCA-Visualization-Tutorial-in-R/blob/b914277f23d70ba3831a69bf0428310099d7b1dc/Dataset%20after%20PCA.jpeg)
 
 Since we used 200 consecutive points, `Dt.Plot.Traj` data frame has 200 rows and 4 columns.
 
@@ -219,7 +219,7 @@ p_2D_PCA_Traj <-
 p_2D_PCA_Traj
 ```
 
-![](/Users/yonwang/Desktop/PCA Trajectory/Figure/Figure for Post/2D PCA Trejactory.jpeg)
+![](https://github.com/YzwIsALaity/PCA-Visualization-Tutorial-in-R/blob/b914277f23d70ba3831a69bf0428310099d7b1dc/2D%20PCA%20Trejactory.jpeg)
 
 In the 2D version, the effect of treatment over time in 2D PC space shows different trends. Without treatment, the trajectory tends to move towards the upper-left corner over time, whereas after treatment is applied, it tends to move towards the lower-right corner.
 
@@ -245,7 +245,7 @@ p_3D_PCA_Traj <- p_3D_PCA_Traj %>% layout(scene = list(xaxis = list(title = 'PC1
 p_3D_PCA_Traj
 ```
 
-![](/Users/yonwang/Desktop/PCA Trajectory/Figure/Figure for Post/3D PCA Trejactory.jpeg)
+![](https://github.com/YzwIsALaity/PCA-Visualization-Tutorial-in-R/blob/b914277f23d70ba3831a69bf0428310099d7b1dc/3D%20PCA%20Trejactory.jpeg)
 
 Here we go!
 
@@ -293,4 +293,4 @@ p_3D_PCA_Traj <- p_3D_PCA_Traj %>% layout(scene = list(xaxis = list(title = 'PC1
 p_3D_PCA_Traj
 ```
 
-![](/Users/yonwang/Desktop/PCA Trajectory/Figure/Figure for Post/3D PCA Trajectory Subject Level.jpeg)
+![](https://github.com/YzwIsALaity/PCA-Visualization-Tutorial-in-R/blob/b914277f23d70ba3831a69bf0428310099d7b1dc/3D%20PCA%20Trajectory%20Subject%20Level.jpeg)

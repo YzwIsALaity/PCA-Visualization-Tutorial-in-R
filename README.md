@@ -4,8 +4,6 @@ author: "Yongzhe Wang"
 output: html_document
 ---
 
-![](/Users/yonwang/Desktop/PCA Trajectory/Figure/Figure for Post/The Cover.jpeg)
-
 In this tutorial, we will explore how to __visualization of data with principle component analysis (PCA)__ in R, using `ggplot2` and `plotly.` When dealing with __high dimensional data analysis (# of variables is much greater than # of obs.)__, PCA is one of the most popular choices for dimension reduction. As an unsupervised learning model, PCA does not require users to provide an outcome variable ($\textbf{y}$). Instead, it performs singular value decomposition or eigenvalue decomposition on a high-dimensional input matrix ($\textbf{X}$) to improve the interpretability of the data. It is often useful to visualize the results from a PCA model, and users typically focus on the first two or three principal components (PC1, PC2, and PC3) since they may explain a significant proportion of the variance in the input data ($\textbf{X}$).
 
 # 1. Dataset
